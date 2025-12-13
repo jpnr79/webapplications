@@ -76,7 +76,7 @@ class Process extends CommonDBTM
         return "ti ti-settings";
     }
 
-    public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
+    public static function getTabNameForItem(\CommonGLPI $item, int $withtemplate = 0): array|string
     {
         if ($_SESSION['glpishow_count_on_tabs']) {
             $ApplianceId = $_SESSION['plugin_webapplications_loaded_appliances_id'] ?? 0;

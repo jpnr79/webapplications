@@ -76,7 +76,7 @@ class Stream extends CommonDBTM
         return "ti ti-network";
     }
 
-    public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
+    public static function getTabNameForItem(\CommonGLPI $item, int $withtemplate = 0): array|string
     {
         if ($_SESSION['glpishow_count_on_tabs']) {
             $ApplianceId = $_SESSION['plugin_webapplications_loaded_appliances_id'] ?? 0;;
@@ -265,9 +265,12 @@ class Stream extends CommonDBTM
      * @return string
      *
      */
-    static function getSpecificValueToDisplay($field, $values, array $options = [])
+    public static function getSpecificValueToDisplay(...$args)
     {
         global $CFG_GLPI;
+        $field = $args[0] ?? null;
+        $values = $args[1] ?? null;
+        $options = $args[2] ?? [];
 
         switch ($field) {
             case "transmitter_type":
@@ -280,13 +283,13 @@ class Stream extends CommonDBTM
                     $items[$type] = $type::getTypeName();
                 }
 
-                if (isset($items[$values['name']])) {
+                if (is_array($values) && isset($items[$values['name']])) {
                     return $items[$values['name']];
                 }
 
                 return "";
         }
-        return parent::getSpecificValueToDisplay($field, $values, $options);
+        return parent::getSpecificValueToDisplay(...$args);
     }
 
     /**
@@ -297,9 +300,13 @@ class Stream extends CommonDBTM
      **@since version 2.3.0
      *
      */
-    public static function getSpecificValueToSelect($field, $name = '', $values = '', array $options = [])
+    public static function getSpecificValueToSelect(...$args)
     {
         global $CFG_GLPI;
+        $field = $args[0] ?? null;
+        $name = $args[1] ?? '';
+        $values = $args[2] ?? '';
+        $options = $args[3] ?? [];
 
         if (!is_array($values)) {
             $values = [$field => $values];
@@ -315,14 +322,14 @@ class Stream extends CommonDBTM
                 foreach ($types as $k => $type) {
                     $items[$type] = $type::getTypeName();
                 }
-                $options['value'] = $values[$field];
+                $options['value'] = $values[$field] ?? null;
                 return Dropdown::showFromArray(
                     $name,
                     $items,
                     $options
                 );
         }
-        return parent::getSpecificValueToSelect($field, $name, $values, $options);
+        return parent::getSpecificValueToSelect(...$args);
     }
 
     public function defineTabs($options = [])

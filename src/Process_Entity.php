@@ -63,14 +63,14 @@ class Process_Entity extends CommonDBTM
     }
 
 
-    public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
+    public static function getTabNameForItem(\CommonGLPI $item, int $withtemplate = 0): array|string
     {
         switch ($item::getType()) {
             case Entity::class:
                 if ($_SESSION['glpishow_count_on_tabs']) {
                     $dbu = new DbUtils();
                     $nb = $dbu->countElementsInTable(
-                        $this->getTable(),
+                        self::getTable(),
                         ["plugin_webapplications_entities_id" => $item->getID()]
                     );
                     return self::createTabEntry(
@@ -84,7 +84,7 @@ class Process_Entity extends CommonDBTM
                 if ($_SESSION['glpishow_count_on_tabs']) {
                     $dbu = new DbUtils();
                     $nb = $dbu->countElementsInTable(
-                        $this->getTable(),
+                        self::getTable(),
                         ["plugin_webapplications_processes_id" => $item->getID()]
                     );
                     return self::createTabEntry(

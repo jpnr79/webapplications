@@ -138,6 +138,7 @@ class Appliance extends CommonDBTM
             return false;
         }
         self::setAppliance($item);
+        return false;
     }
 
 
@@ -153,6 +154,7 @@ class Appliance extends CommonDBTM
             return false;
         }
         self::setAppliance($item);
+        return false;
     }
 
     /**
@@ -222,7 +224,7 @@ class Appliance extends CommonDBTM
         $temp->deleteByCriteria(['appliances_id' => $item->getID()]);
     }
 
-    public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
+    public static function getTabNameForItem(\CommonGLPI $item, int $withtemplate = 0): array|string
     {
         return __('Appliance');
     }

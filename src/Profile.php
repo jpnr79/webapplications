@@ -53,7 +53,7 @@ class Profile extends \Profile
      *
      * @return string|translated
      */
-    public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
+    public static function getTabNameForItem(\CommonGLPI $item, int $withtemplate = 0): array|string
     {
         if ($item->getType() == 'Profile') {
             if ($item->getField('interface') == 'central') {
@@ -92,7 +92,6 @@ class Profile extends \Profile
                     'plugin_webapplications_streams' => 0,
                     'plugin_webapplications_entities' => 0,
                     'plugin_webapplications_processes' => 0,
-                    'plugin_webapplications_entities' => 0,
                 ]
             );
             $prof->showForm($ID);
@@ -193,6 +192,7 @@ class Profile extends \Profile
             Html::closeForm();
         }
         echo "</div>";
+        return;
     }
 
     /**
@@ -293,6 +293,7 @@ class Profile extends \Profile
                 }
             }
         }
+        return true;
     }
 
     /**

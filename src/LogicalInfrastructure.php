@@ -59,7 +59,7 @@ class LogicalInfrastructure extends CommonDBTM
     }
 
 
-    public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
+    public static function getTabNameForItem(\CommonGLPI $item, int $withtemplate = 0): array|string
     {
         global $DB;
 

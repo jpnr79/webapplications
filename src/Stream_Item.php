@@ -63,14 +63,14 @@ class Stream_Item extends CommonDBTM
     }
 
 
-    public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
+    public static function getTabNameForItem(\CommonGLPI $item, int $withtemplate = 0): array|string
     {
         switch ($item::getType()) {
             case Stream::class:
                 if ($_SESSION['glpishow_count_on_tabs']) {
                     $dbu = new DbUtils();
                     $nbItems = $dbu->countElementsInTable(
-                        $this->getTable(),
+                        self::getTable(),
                         ["plugin_webapplications_streams_id" => $item->getID()]
                     );
                     return self::createTabEntry(self::getTypeName($nbItems), $nbItems);

@@ -60,7 +60,7 @@ class PhysicalInfrastructure extends CommonDBTM
         return "ti ti-server";
     }
 
-    public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
+    public static function getTabNameForItem(\CommonGLPI $item, int $withtemplate = 0): array|string
     {
         if ($_SESSION['glpishow_count_on_tabs']) {
             $nb = count(self::getItems());
