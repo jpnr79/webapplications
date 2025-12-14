@@ -63,7 +63,7 @@ class Process_Entity extends CommonDBTM
     }
 
 
-    public static function getTabNameForItem(\CommonGLPI $item, int $withtemplate = 0): array|string
+    public function getTabNameForItem(\CommonGLPI $item, $withtemplate = 0): array|string
     {
         switch ($item::getType()) {
             case Entity::class:

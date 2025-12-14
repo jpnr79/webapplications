@@ -76,7 +76,7 @@ class Stream extends CommonDBTM
         return "ti ti-network";
     }
 
-    public static function getTabNameForItem(\CommonGLPI $item, int $withtemplate = 0): array|string
+    public function getTabNameForItem(\CommonGLPI $item, $withtemplate = 0): array|string
     {
         if ($_SESSION['glpishow_count_on_tabs']) {
             $ApplianceId = $_SESSION['plugin_webapplications_loaded_appliances_id'] ?? 0;;
@@ -265,12 +265,9 @@ class Stream extends CommonDBTM
      * @return string
      *
      */
-    public static function getSpecificValueToDisplay(...$args)
+    public static function getSpecificValueToDisplay($field, $values, array $options = [])
     {
         global $CFG_GLPI;
-        $field = $args[0] ?? null;
-        $values = $args[1] ?? null;
-        $options = $args[2] ?? [];
 
         switch ($field) {
             case "transmitter_type":
@@ -289,7 +286,7 @@ class Stream extends CommonDBTM
 
                 return "";
         }
-        return parent::getSpecificValueToDisplay(...$args);
+        return parent::getSpecificValueToDisplay($field, $values, $options);
     }
 
     /**
@@ -300,13 +297,9 @@ class Stream extends CommonDBTM
      **@since version 2.3.0
      *
      */
-    public static function getSpecificValueToSelect(...$args)
+    public static function getSpecificValueToSelect($field, $name = '', $values = '', array $options = [])
     {
         global $CFG_GLPI;
-        $field = $args[0] ?? null;
-        $name = $args[1] ?? '';
-        $values = $args[2] ?? '';
-        $options = $args[3] ?? [];
 
         if (!is_array($values)) {
             $values = [$field => $values];
@@ -329,7 +322,7 @@ class Stream extends CommonDBTM
                     $options
                 );
         }
-        return parent::getSpecificValueToSelect(...$args);
+        return parent::getSpecificValueToSelect($field, $name, $values, $options);
     }
 
     public function defineTabs($options = [])

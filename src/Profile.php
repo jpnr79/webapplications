@@ -53,7 +53,7 @@ class Profile extends \Profile
      *
      * @return string|translated
      */
-    public static function getTabNameForItem(\CommonGLPI $item, int $withtemplate = 0): array|string
+    public function getTabNameForItem(\CommonGLPI $item, $withtemplate = 0): array|string
     {
         if ($item->getType() == 'Profile') {
             if ($item->getField('interface') == 'central') {

@@ -224,7 +224,7 @@ class Appliance extends CommonDBTM
         $temp->deleteByCriteria(['appliances_id' => $item->getID()]);
     }
 
-    public static function getTabNameForItem(\CommonGLPI $item, int $withtemplate = 0): array|string
+    public function getTabNameForItem(\CommonGLPI $item, $withtemplate = 0): array|string
     {
         return __('Appliance');
     }
