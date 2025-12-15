@@ -102,12 +102,12 @@ class LogicalInfrastructure extends CommonDBTM
                         [
                             // Source item is our item
                             'itemtype_source' => get_class($item),
-                            'items_id_source' => $item->fields['id'] ?? '',
+                            'items_id_source' => (($item->fields['id'] ?? '')),
                         ],
                         [
                             // Impacted item is our item AND source item is enabled
                             'itemtype_impacted' => get_class($item),
-                            'items_id_impacted' => $item->fields['id'] ?? '',
+                            'items_id_impacted' => (($item->fields['id'] ?? '')),
                             'itemtype_source'   => Impact::getEnabledItemtypes()
                         ]
                     ]
@@ -176,7 +176,7 @@ class LogicalInfrastructure extends CommonDBTM
             );
         }
 
-        $ID = $item->fields['id'] ?? '';
+        $ID = (($item->fields['id'] ?? ''));
 
         // Don't show the impact analysis on new object
         if ($item->isNewID($ID)) {
@@ -228,7 +228,7 @@ class LogicalInfrastructure extends CommonDBTM
         // Build graph and params
         $graph = Impact::buildGraph($item, true);
         $params = Impact::prepareParams($item);
-        $readonly = !$item->can($item->fields['id'] ?? '', UPDATE);
+        $readonly = !$item->can((($item->fields['id'] ?? '')), UPDATE);
 
         // Print header
         Impact::printHeader(Impact::makeDataForCytoscape($graph), $params, $readonly);

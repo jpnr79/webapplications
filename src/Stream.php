@@ -160,8 +160,8 @@ class Stream extends CommonDBTM
             && !empty($input['appliances_id'])) {
             $item = new \Appliance();
             if ($item->getFromDB($input['appliances_id'])) {
-                $input['entities_id'] = $item->fields['entities_id'] ?? '';
-                $input['is_recursive'] = $item->fields['is_recursive'] ?? '';
+                $input['entities_id'] = (($item->fields['entities_id'] ?? ''));
+                $input['is_recursive'] = (($item->fields['is_recursive'] ?? ''));
             }
         }
         return $input;
@@ -393,11 +393,11 @@ class Stream extends CommonDBTM
             echo $name;
             echo "</p>";
             echo "<p class='card-text'>";
-            echo $object->fields['protocol'] ?? '' . " - " . $object->fields['port'] ?? '';
+            echo (($object->fields['protocol'] ?? '')) . " - " . (($object->fields['port'] ?? ''));
             echo "</p>";
             if ($object->fields['encryption'] == 1) {
                 echo "<p class='card-text'>";
-                echo __('Encryption type', 'webapplications') . " : " . $object->fields['encryption_type'] ?? '';
+                echo __('Encryption type', 'webapplications') . " : " . (($object->fields['encryption_type'] ?? ''));
                 echo "</p>";
             }
             $link = $object::getFormURLWithID($id);

@@ -165,28 +165,28 @@ class Appliance extends CommonDBTM
         $appliance = new Appliance();
         if (!empty($item->fields)) {
             $appliance->getFromDBByCrit(['appliances_id' => $item->getID()]);
-            $address = isset($item->input['address']) ? $item->input['address'] : $appliance->fields['address'] ?? '';
-            $backoffice = isset($item->input['backoffice']) ? $item->input['backoffice'] : $appliance->fields['backoffice'] ?? '';
-            $number_users = isset($item->input['number_users']) ? $item->input['number_users'] : $appliance->fields['number_users'] ?? '';
-            $version = isset($item->input['version']) ? $item->input['version'] : $appliance->fields['version'] ?? '';
-            $editor = isset($item->input['editor']) ? $item->input['editor'] : $appliance->fields['editor'] ?? '';
+            $address = isset($item->input['address']) ? $item->input['address'] : (($appliance->fields['address'] ?? ''));
+            $backoffice = isset($item->input['backoffice']) ? $item->input['backoffice'] : (($appliance->fields['backoffice'] ?? ''));
+            $number_users = isset($item->input['number_users']) ? $item->input['number_users'] : (($appliance->fields['number_users'] ?? ''));
+            $version = isset($item->input['version']) ? $item->input['version'] : (($appliance->fields['version'] ?? ''));
+            $editor = isset($item->input['editor']) ? $item->input['editor'] : (($appliance->fields['editor'] ?? ''));
             if (is_array($appliance->fields) && count($appliance->fields) > 0) {
                 $appliance->update([
-                    'id' => $appliance->fields['id'] ?? '',
+                    'id' => (($appliance->fields['id'] ?? '')),
                     'address' => $address,
                     'version' => $version,
                     'editor' => $editor,
                     'backoffice' => $backoffice,
                     'number_users' => $number_users,
-                    'webapplicationservertypes_id' => isset($item->input['webapplicationservertypes_id']) ? $item->input['webapplicationservertypes_id'] : $appliance->fields['webapplicationservertypes_id'] ?? '',
-                    'webapplicationtechnics_id' => isset($item->input['webapplicationtechnics_id']) ? $item->input['webapplicationtechnics_id'] : $appliance->fields['webapplicationtechnics_id'] ?? '',
-                    'webapplicationexternalexpositions_id' => isset($item->input['webapplicationexternalexpositions_id']) ? $item->input['webapplicationexternalexpositions_id'] : $appliance->fields['webapplicationexternalexpositions_id'] ?? '',
-                    'webapplicationreferringdepartmentvalidation' => isset($item->input['webapplicationreferringdepartmentvalidation']) ? $item->input['webapplicationreferringdepartmentvalidation'] : $appliance->fields['webapplicationreferringdepartmentvalidation'] ?? '',
-                    'webapplicationciovalidation' => isset($item->input['webapplicationciovalidation']) ? $item->input['webapplicationciovalidation'] : $appliance->fields['webapplicationciovalidation'] ?? '',
-                    'webapplicationavailabilities' => isset($item->input['webapplicationavailabilities']) ? $item->input['webapplicationavailabilities'] : $appliance->fields['webapplicationavailabilities'] ?? '',
-                    'webapplicationintegrities' => isset($item->input['webapplicationintegrities']) ? $item->input['webapplicationintegrities'] : $appliance->fields['webapplicationintegrities'] ?? '',
-                    'webapplicationconfidentialities' => isset($item->input['webapplicationconfidentialities']) ? $item->input['webapplicationconfidentialities'] : $appliance->fields['webapplicationconfidentialities'] ?? '',
-                    'webapplicationtraceabilities' => isset($item->input['webapplicationtraceabilities']) ? $item->input['webapplicationtraceabilities'] : $appliance->fields['webapplicationtraceabilities'] ?? ''
+                    'webapplicationservertypes_id' => isset($item->input['webapplicationservertypes_id']) ? $item->input['webapplicationservertypes_id'] : (($appliance->fields['webapplicationservertypes_id'] ?? '')),
+                    'webapplicationtechnics_id' => isset($item->input['webapplicationtechnics_id']) ? $item->input['webapplicationtechnics_id'] : (($appliance->fields['webapplicationtechnics_id'] ?? '')),
+                    'webapplicationexternalexpositions_id' => isset($item->input['webapplicationexternalexpositions_id']) ? $item->input['webapplicationexternalexpositions_id'] : (($appliance->fields['webapplicationexternalexpositions_id'] ?? '')),
+                    'webapplicationreferringdepartmentvalidation' => isset($item->input['webapplicationreferringdepartmentvalidation']) ? $item->input['webapplicationreferringdepartmentvalidation'] : (($appliance->fields['webapplicationreferringdepartmentvalidation'] ?? '')),
+                    'webapplicationciovalidation' => isset($item->input['webapplicationciovalidation']) ? $item->input['webapplicationciovalidation'] : (($appliance->fields['webapplicationciovalidation'] ?? '')),
+                    'webapplicationavailabilities' => isset($item->input['webapplicationavailabilities']) ? $item->input['webapplicationavailabilities'] : (($appliance->fields['webapplicationavailabilities'] ?? '')),
+                    'webapplicationintegrities' => isset($item->input['webapplicationintegrities']) ? $item->input['webapplicationintegrities'] : (($appliance->fields['webapplicationintegrities'] ?? '')),
+                    'webapplicationconfidentialities' => isset($item->input['webapplicationconfidentialities']) ? $item->input['webapplicationconfidentialities'] : (($appliance->fields['webapplicationconfidentialities'] ?? '')),
+                    'webapplicationtraceabilities' => isset($item->input['webapplicationtraceabilities']) ? $item->input['webapplicationtraceabilities'] : (($appliance->fields['webapplicationtraceabilities'] ?? ''))
                 ]);
             } else {
                 $appliance->add([
@@ -253,7 +253,7 @@ class Appliance extends CommonDBTM
 
         $linkEdit = "";
         if ($is_known) {
-            $refEditId = $applianceplugin->fields['editor'] ?? '';
+            $refEditId = (($applianceplugin->fields['editor'] ?? ''));
 
             $editor = new Supplier();
             $editor->getFromDB($refEditId);

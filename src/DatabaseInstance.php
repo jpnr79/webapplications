@@ -247,12 +247,12 @@ class DatabaseInstance extends CommonDBTM
             $database->getFromDBByCrit(['databaseinstances_id' => $item->getID()]);
             if (is_array($database->fields) && count($database->fields) > 0) {
                 $database->update([
-                    'id' => $database->fields['id'] ?? '',
-                    'webapplicationexternalexpositions_id' => isset($item->input['webapplicationexternalexpositions_id']) ? $item->input['webapplicationexternalexpositions_id'] : $database->fields['plugin_webapplications_webapplicationexternalexpositions_id'] ?? '',
-                    'webapplicationavailabilities' => isset($item->input['webapplicationavailabilities']) ? $item->input['webapplicationavailabilities'] : $database->fields['plugin_webapplications_webapplicationavailabilities'] ?? '',
-                    'webapplicationintegrities' => isset($item->input['webapplicationintegrities']) ? $item->input['webapplicationintegrities'] : $database->fields['plugin_webapplications_webapplicationintegrities'] ?? '',
-                    'webapplicationconfidentialities' => isset($item->input['webapplicationconfidentialities']) ? $item->input['webapplicationconfidentialities'] : $database->fields['plugin_webapplications_webapplicationconfidentialities'] ?? '',
-                    'webapplicationtraceabilities' => isset($item->input['webapplicationtraceabilities']) ? $item->input['webapplicationtraceabilities'] : $database->fields['plugin_webapplications_webapplicationtraceabilities'] ?? ''
+                    'id' => (($database->fields['id'] ?? '')),
+                    'webapplicationexternalexpositions_id' => isset($item->input['webapplicationexternalexpositions_id']) ? $item->input['webapplicationexternalexpositions_id'] : (($database->fields['plugin_webapplications_webapplicationexternalexpositions_id'] ?? '')),
+                    'webapplicationavailabilities' => isset($item->input['webapplicationavailabilities']) ? $item->input['webapplicationavailabilities'] : (($database->fields['plugin_webapplications_webapplicationavailabilities'] ?? '')),
+                    'webapplicationintegrities' => isset($item->input['webapplicationintegrities']) ? $item->input['webapplicationintegrities'] : (($database->fields['plugin_webapplications_webapplicationintegrities'] ?? '')),
+                    'webapplicationconfidentialities' => isset($item->input['webapplicationconfidentialities']) ? $item->input['webapplicationconfidentialities'] : (($database->fields['plugin_webapplications_webapplicationconfidentialities'] ?? '')),
+                    'webapplicationtraceabilities' => isset($item->input['webapplicationtraceabilities']) ? $item->input['webapplicationtraceabilities'] : (($database->fields['plugin_webapplications_webapplicationtraceabilities'] ?? ''))
                 ]);
             } else {
                 if ($item->getID() > 0) {
@@ -342,11 +342,11 @@ class DatabaseInstance extends CommonDBTM
                 }
             }
 
-            if ($object->fields['databaseinstancetypes_id'] ?? '' > 0) {
+            if ((($object->fields['databaseinstancetypes_id'] ?? '')) > 0) {
                 echo "<p class='card-text'>";
                 echo __('Type') . " " . Dropdown::getDropdownName(
                         "glpi_databaseinstancetypes",
-                        $object->fields['databaseinstancetypes_id'] ?? ''
+                        (($object->fields['databaseinstancetypes_id'] ?? ''))
                     );
                 echo "</p>";
             }
