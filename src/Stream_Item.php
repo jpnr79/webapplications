@@ -94,7 +94,7 @@ class Stream_Item extends CommonDBTM
     public function showForStream($item)
     {
         global $DB;
-        $ID = $item->fields['id'];
+        $ID = $item->fields['id'] ?? '';
         $rand = mt_rand();
 
         if (!$this->canView()) {
@@ -112,7 +112,7 @@ class Stream_Item extends CommonDBTM
         ]);
 
         $stream = new Stream();
-        $canedit = $stream->can($item->fields['id'], UPDATE);
+        $canedit = $stream->can($item->fields['id'] ?? '', UPDATE);
         if ($canedit) {
             echo "<form name='form' method='post' action='" .
                 Toolbox::getItemTypeFormURL(Stream_Item::class) . "'>";

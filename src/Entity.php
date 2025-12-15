@@ -115,8 +115,8 @@ class Entity extends CommonDBTM
             && !empty($input['appliances_id'])) {
             $item = new \Appliance();
             if ($item->getFromDB($input['appliances_id'])) {
-                $input['entities_id'] = $item->fields['entities_id'];
-                $input['is_recursive'] = $item->fields['is_recursive'];
+                $input['entities_id'] = $item->fields['entities_id'] ?? '';
+                $input['is_recursive'] = $item->fields['is_recursive'] ?? '';
             }
         }
         return $input;
@@ -216,21 +216,21 @@ class Entity extends CommonDBTM
             echo "</div>";
             echo "<div style='display: inline-block;'>";
             echo "<h5 class='card-title' style='font-size: 14px;'>" . $object->getLink() . "</h5>";
-            if ($object->fields['owner'] > 0) {
+            if ($object->fields['owner'] ?? '' > 0) {
                 echo "<p class='card-text'>";
-                echo __('Owner', 'webapplications')." : ".getUserName($object->fields['owner']);
+                echo __('Owner', 'webapplications')." : ".getUserName($object->fields['owner'] ?? '');
                 echo "</p>";
             }
-            if ($object->fields['security_contact'] > 0) {
+            if ($object->fields['security_contact'] ?? '' > 0) {
                 echo "<p class='card-text'>";
                 echo __('Security Contact', 'webapplications') . " : " . getUserName(
-                        $object->fields['security_contact']
+                        $object->fields['security_contact'] ?? ''
                     );
                 echo "</p>";
             }
-            if (!empty($object->fields['relation_nature'])) {
+            if (!empty($object->fields['relation_nature'] ?? '')) {
                 echo "<p class='card-text'>";
-                echo __('Relation nature', 'webapplications') . " : " . $object->fields['relation_nature'];
+                echo __('Relation nature', 'webapplications') . " : " . $object->fields['relation_nature'] ?? '';
                 echo "</p>";
             }
             $link = $object::getFormURLWithID($id);

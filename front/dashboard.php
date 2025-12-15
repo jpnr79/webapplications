@@ -130,7 +130,7 @@ if (isset($_POST['add'])) {
         'items_id' => $_POST['items_id'],
         'itemtype' => $_POST['itemtype']
     ])) {
-        $appliances_id = $itemsAppDBTM->fields['appliances_id'];
+        $appliances_id = $itemsAppDBTM->fields['appliances_id'] ?? '';
     }
     $itemsAppDBTM->deleteByCriteria([
         'items_id' => $_POST['items_id'],

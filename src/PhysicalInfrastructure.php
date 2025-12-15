@@ -94,7 +94,7 @@ class PhysicalInfrastructure extends CommonDBTM
 
             $itemDBTM = new $st['itemtype'];
             if ($itemDBTM->getFromDB($st['items_id'])) {
-                $item = ['id' => $st['items_id'],'name' => $itemDBTM->fields['name'], 'itemtype' => $st['itemtype']];
+                $item = ['id' => $st['items_id'],'name' => $itemDBTM->fields['name'] ?? '', 'itemtype' => $st['itemtype']];
                 array_push($listItem, $item);
             }
         }
@@ -129,7 +129,7 @@ class PhysicalInfrastructure extends CommonDBTM
 
                 $object->getFromDB($items_id);
                 $id = $items_id;
-                $name = $object->fields['name'];
+                $name = $object->fields['name'] ?? '';
 
                 echo "<div class='card w-25'>";// style='margin-right: 10px;margin-top: 10px;'
                 echo "<div class='card-body'>";
@@ -189,9 +189,9 @@ class PhysicalInfrastructure extends CommonDBTM
 
                 echo "<p class='card-text'>";
                 if ($itemtype == "Computer") {
-                    echo Dropdown::getDropdownName("glpi_computertypes", $object->fields['computertypes_id']);
+                    echo Dropdown::getDropdownName("glpi_computertypes", $object->fields['computertypes_id'] ?? '');
                 } else if ($itemtype == "NetworkEquipment") {
-                    echo Dropdown::getDropdownName("glpi_networkequipmenttypes", $object->fields['networkequipmenttypes_id']);
+                    echo Dropdown::getDropdownName("glpi_networkequipmenttypes", $object->fields['networkequipmenttypes_id'] ?? '');
                 }
                 echo "</p>";
                 echo "<p class='card-text'>";
@@ -218,7 +218,7 @@ class PhysicalInfrastructure extends CommonDBTM
                             'items_id' => $dataname['id']]]) as $data) {
                             $ip->getFromDB($data['id']);
 
-                            if ($ip->getName() != "127.0.0.1" && $ip->fields['version'] != 6) {
+                            if ($ip->getName() != "127.0.0.1" && $ip->fields['version'] ?? '' != 6) {
                                 $iplist .= $ip->getName() . "<br>";
                             }
 

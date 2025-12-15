@@ -104,7 +104,7 @@ class Certificate extends CommonDBTM
 
 
             echo "<p class='card-text'>";
-            echo Html::convDateTime($object->fields['date_expiration']);
+            echo Html::convDateTime($object->fields['date_expiration'] ?? '');
             echo "</p>";
 
             $link = $object::getFormURLWithID($id);

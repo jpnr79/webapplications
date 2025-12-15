@@ -138,8 +138,8 @@ class Process extends CommonDBTM
             && !empty($input['appliances_id'])) {
             $item = new \Appliance();
             if ($item->getFromDB($input['appliances_id'])) {
-                $input['entities_id'] = $item->fields['entities_id'];
-                $input['is_recursive'] = $item->fields['is_recursive'];
+                $input['entities_id'] = $item->fields['entities_id'] ?? '';
+                $input['is_recursive'] = $item->fields['is_recursive'] ?? '';
             }
         }
         return $input;
@@ -259,30 +259,30 @@ class Process extends CommonDBTM
             echo "</div>";
             echo "<div style='display: inline-block;'>";
             echo "<h5 class='card-title' style='font-size: 14px;'>" . $object->getLink() . "</h5>";
-            if ($object->fields['owner'] > 0) {
+            if ($object->fields['owner'] ?? '' > 0) {
                 echo "<p class='card-text'>";
-                echo __('Owner', 'webapplications') . " : " . getUserName($object->fields['owner']);
+                echo __('Owner', 'webapplications') . " : " . getUserName($object->fields['owner'] ?? '');
                 echo "</p>";
             }
             echo "<p class='card-text'>";
-            $background = Appliance::getColorForDICT($object->fields['webapplicationavailabilities']);
+            $background = Appliance::getColorForDICT($object->fields['webapplicationavailabilities'] ?? '');
             echo "<span class='dict-min' style='background-color:$background' title='" . __('Availability', 'webapplications') . "'>";
-            echo $object->fields['webapplicationavailabilities'];
+            echo $object->fields['webapplicationavailabilities'] ?? '';
             echo "</span>";
 
-            $background = Appliance::getColorForDICT($object->fields['webapplicationintegrities']);
+            $background = Appliance::getColorForDICT($object->fields['webapplicationintegrities'] ?? '');
             echo "<span class='dict-min' style='background-color:$background' title='" . __('Integrity', 'webapplications') . "'>";
-            echo $object->fields['webapplicationintegrities'];
+            echo $object->fields['webapplicationintegrities'] ?? '';
             echo "</span>";
 
-            $background = Appliance::getColorForDICT($object->fields['webapplicationconfidentialities']);
+            $background = Appliance::getColorForDICT($object->fields['webapplicationconfidentialities'] ?? '');
             echo "<span class='dict-min' style='background-color:$background' title='" . __('Confidentiality', 'webapplications') . "'>";
-            echo $object->fields['webapplicationconfidentialities'];
+            echo $object->fields['webapplicationconfidentialities'] ?? '';
             echo "</span>";
 
-            $background = Appliance::getColorForDICT($object->fields['webapplicationtraceabilities']);
+            $background = Appliance::getColorForDICT($object->fields['webapplicationtraceabilities'] ?? '');
             echo "<span class='dict-min' style='background-color:$background' title='" . __('Traceability', 'webapplications') . "'>";
-            echo $object->fields['webapplicationtraceabilities'];
+            echo $object->fields['webapplicationtraceabilities'] ?? '';
             echo "</span>";
             echo "</p>";
 

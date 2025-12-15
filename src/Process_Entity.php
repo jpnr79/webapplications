@@ -118,7 +118,7 @@ class Process_Entity extends CommonDBTM
         }
 
         $entity = new Entity();
-        $canedit = $entity->can($item->fields['id'], UPDATE);
+        $canedit = $entity->can($item->fields['id'] ?? '', UPDATE);
         if ($canedit) {
             echo "<form name='form' method='post' action='" .
                 Toolbox::getItemTypeFormURL(Process_Entity::class) . "'>";
@@ -181,7 +181,7 @@ class Process_Entity extends CommonDBTM
         }
 
         $process = new Process();
-        $canedit = $process->can($item->fields['id'], UPDATE);
+        $canedit = $process->can($item->fields['id'] ?? '', UPDATE);
         if ($canedit) {
             echo "<form name='form' method='post' action='" .
                 Toolbox::getItemTypeFormURL(Process_Entity::class) . "'>";
